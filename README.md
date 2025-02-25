@@ -4,3 +4,4 @@
 
 - ## [Practica 1:](practica1.md)
 - ## [Practica 2:](practica2.md)
+- ## [Practica 3:](docs/index.html) Curriculum Virtual en [GHP](https://uwuolf.github.io/5toSemestre/)
