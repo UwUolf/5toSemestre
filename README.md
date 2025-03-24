@@ -7,4 +7,5 @@
 - ## [Practica 3:](docs/index.html) Curriculum Virtual en GHP
 - ## [Practica 5:](https://uwuolf.github.io/5toSemestre/)
 - ## [Practica 6:](docs/practica-6/main.js)
-- ## [Practica 7:](https://uwuolf.github.io/5toSemestre/)
+- ## [Practica 7:](docs/practica-7/main.js)
+- ## [Practica 8:](docs/practica-8/main.js)
