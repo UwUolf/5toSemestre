@@ -2,9 +2,9 @@ img{
   max-width: 100%;
 }
 
-h1, h2{
+h1{
   text-align: center;
-  color:crimson
+  color: crimson;
 }
 #productos {
   display: flex;
