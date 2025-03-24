@@ -3,99 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Tienda</title>
+  <title>Tienda Dinámica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #productos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .producto {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      width: calc(25% - 20px);
+    }
+    .producto img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+    #carrito {
+      margin-top: 20px;
+    }
+    #loader {
+      display: none;
+      margin: 20px auto;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-  <h1>Simulador de Tienda</h1>
+  <h1>Catálogo de Productos</h1>
+  <div id="loader"></div>
+  <ul id="productos"></ul>
 
-  <!-- Sección de productos -->
-  <h2>Productos Disponibles</h2>
-  <ul id="productos"></ul> <!-- Aquí se agregarán los botones dinámicamente -->
-
-  <!-- Carrito -->
   <h2>Carrito</h2>
   <ul id="carrito"></ul>
   <p id="total"></p>
-  <button id="procesar-compra">Procesar Compra</button>
 
-  <button id="simular-compra">Simular Compra</button>
-  <div id="loader" style="display: none;"></div> <!-- Loader será dinámico -->
-  <!-- Vinculamos tu archivo de JavaScript -->
+  <div id="loader-container" style="display: none; text-align: center; margin: 20px 0;">
+    <div id="loader"></div>
+    <p>Procesando tu compra...</p>
+  </div>
+  
+
   <script src="main.js"></script>
-  <script>
-    // Función para renderizar productos con botones "+" y "-"
-    function renderizarProductos() {
-      const listaProductos = document.getElementById("productos");
-      listaProductos.innerHTML = ""; // Limpiar contenido previo
-      productos.forEach(producto => {
-        const li = document.createElement("li");
-        li.textContent = `${producto.nombre} - $${producto.precio} (Stock: ${producto.stock}) `;
-
-        // Botón "+"
-        const botonAgregar = document.createElement("button");
-        botonAgregar.textContent = "+";
-        botonAgregar.addEventListener("click", () => {
-          agregarAlCarrito(producto.nombre, 1); // Agregar 1 unidad
-          renderizarProductos();
-          renderizarCarrito();
-        });
-
-        // Botón "-"
-        const botonQuitar = document.createElement("button");
-        botonQuitar.textContent = "-";
-        botonQuitar.addEventListener("click", () => {
-          eliminarDelCarrito(producto.nombre, 1); // Eliminar 1 unidad
-          renderizarProductos();
-          renderizarCarrito();
-        });
-
-        // Añadir botones al elemento del producto
-        li.appendChild(botonAgregar);
-        li.appendChild(botonQuitar);
-
-        // Añadir el producto a la lista
-        listaProductos.appendChild(li);
-      });
-    }
-
-    // Función para renderizar el carrito
-    function renderizarCarrito() {
-      const listaCarrito = document.getElementById("carrito");
-      listaCarrito.innerHTML = ""; // Limpiar contenido previo
-      carrito.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.nombre} x${item.cantidad} - Total: $${item.precio * item.cantidad}`;
-        listaCarrito.appendChild(li);
-      });
-
-      // Mostrar el total del carrito
-      const total = calcularTotal();
-      document.getElementById("total").textContent = `Total: $${total.toFixed(2)}`;
-    }
-
-    // Botón para procesar la compra con cuenta regresiva
-    document.getElementById("procesar-compra").addEventListener("click", function () {
-      if (carrito.length === 0) {
-        alert("El carrito está vacío. Agrega productos antes de procesar la compra.");
-        return;
-      }
-
-      // Mostrar la cuenta regresiva
-      mostrarCuentaRegresiva();
-
-      // Simular el procesamiento de compra después de la cuenta regresiva
-      setTimeout(() => {
-        procesarCompra();
-        carrito = []; // Vaciar el carrito después de la compra
-        renderizarCarrito();
-      }, 3000);
-    });
-
-    // Inicializar la página mostrando productos y el carrito
-    document.addEventListener("DOMContentLoaded", () => {
-      renderizarProductos();
-      renderizarCarrito();
-    });
-  </script>
 </body>
 </html>

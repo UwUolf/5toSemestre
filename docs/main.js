@@ -1,173 +1,182 @@
-//1. Crear un Arreglo de Productos:
-let productos = [
-  { nombre: "Camiseta", precio: 15, stock: 10 },
-  { nombre: "Pantalón", precio: 25, stock: 8 },
-  { nombre: "Zapatos", precio: 50, stock: 5 },
-  { nombre: "Sombrero", precio: 10, stock: 20 },
-  { nombre: "Vestido", precio: 30, stock: 15 },
-];
+const d = document;
+const $productosUL = d.querySelector("#productos");
+const $carritoUL = d.querySelector("#carrito");
+const $totalP = d.querySelector("#total");
+const $loader = d.querySelector("#loader");
 
-//2. Agregar Productos al Carrito:
+// Inicializar productos y carrito
+let productos = [];
 let carrito = [];
 
-function agregarAlCarrito(productoNombre, cantidad) {
-  for (let producto of productos) {
-    if (producto.nombre === productoNombre) {
-      if (producto.stock >= cantidad) {
-        carrito.push({
-          nombre: productoNombre,
-          cantidad: cantidad,
-          precio: producto.precio,
-        });
+// Función para cargar productos desde la Fake Store API
+async function cargarProductos() {
+  $loader.style.display = "block"; // Mostrar el loader mientras se cargan los productos
+  try {
+    const response = await fetch("https://fakestoreapi.com/products");
+    if (!response.ok) throw new Error("Error al cargar productos de la API");
 
-        producto.stock -= cantidad;
-        console.log(
-          `* ${cantidad} ${productoNombre}(s) agregado(s) al carrito.`
-        );
-        console.log(productos);
-        console.log(carrito);
-        console.log("***************************");
-      } else {
-        console.log(
-          `No hay suficiente stock del producto "${productoNombre}".`
-        );
-        return;
-      }
-    }
+    const data = await response.json();
+
+    // Agregar stock simulado a los productos
+    productos = data.map((producto) => ({
+      ...producto,
+      stock: Math.floor(Math.random() * 20) + 1, // Generar stock entre 1 y 20
+    }));
+
+    renderizarProductos(); // Mostrar productos en el DOM
+  } catch (error) {
+    console.error("Hubo un error al cargar los productos:", error);
+  } finally {
+    $loader.style.display = "none"; // Ocultar el loader
   }
 }
 
-function eliminarDelCarrito(productoNombre, cantidad) {
-  for (let i = 0; i < carrito.length; i++) {
-    if (carrito[i].nombre === productoNombre) {
-      if (carrito[i].cantidad > cantidad) {
-        carrito[i].cantidad -= cantidad;
-        console.log(
-          `* ${cantidad} ${productoNombre}(s) eliminado(s) del carrito.`
-        );
-      } else {
-        carrito.splice(i, 1); // Eliminar el producto del carrito
-        console.log(`* ${productoNombre} eliminado completamente del carrito.`);
-      }
-      
-      // Aumentar el stock del producto eliminado en la lista de productos
-      for (let producto of productos) {
-        if (producto.nombre === productoNombre) {
-          producto.stock += cantidad;
-          break;
-        }
-      }
+// Función para renderizar los productos en el DOM
+function renderizarProductos() {
+  $productosUL.innerHTML = ""; // Limpiar el contenido previo
 
-      console.log(productos);
-      console.log(carrito);
-      console.log("***************************");
-      return; // Salir de la función después de procesar
-    }
-  }
-  console.log(`El producto "${productoNombre}" no se encuentra en el carrito.`);
+  productos.forEach((producto) => {
+    const li = document.createElement("li");
+    li.classList.add("producto");
+
+    li.innerHTML = `
+      <img src="${producto.image}" alt="${producto.title}">
+      <h3>${producto.title}</h3>
+      <p>Precio: $${producto.price}</p>
+      <p>Stock: ${producto.stock}</p>
+    `;
+
+    const botonAgregar = document.createElement("button");
+    botonAgregar.textContent = "Agregar al carrito";
+    botonAgregar.addEventListener("click", () => {
+      agregarAlCarrito(producto.id, 1);
+      renderizarCarrito();
+    });
+
+    li.appendChild(botonAgregar);
+    $productosUL.appendChild(li);
+  });
 }
 
-
-//3. Calcular el Total del Carrito:
-function calcularTotal() {
-  let total = 0;
-  for (let item of carrito) {
-    total += item.precio * item.cantidad;
+// Función para agregar productos al carrito
+function agregarAlCarrito(idProducto, cantidad) {
+  const producto = productos.find((p) => p.id === idProducto);
+  if (!producto || producto.stock < cantidad) {
+    alert("Stock insuficiente.");
+    return;
   }
 
-  return total;
-}
-
-let imprimirTotal = calcularTotal();
-//console.log(`Venta Total: $${imprimirTotal}`);
-
-// 4.Aplicar Descuentos:
-function aplicarDescuento(total) {
-  if (total > 100) {
-    return total * 0.9;
+  const productoEnCarrito = carrito.find((p) => p.id === idProducto);
+  if (productoEnCarrito) {
+    productoEnCarrito.cantidad += cantidad;
+  } else {
+    carrito.push({ id: producto.id, nombre: producto.title, precio: producto.price, cantidad });
   }
 
-  return total;
+  producto.stock -= cantidad; // Reducir el stock disponible
+  renderizarProductos(); // Actualizar productos en el DOM
 }
 
-let imprimirDescuento = aplicarDescuento(imprimirTotal);
-//console.log(`Venta con Descuento del 10%: $${imprimirDescuento}`);
+// Función para eliminar productos del carrito
+function eliminarDelCarrito(idProducto, cantidad) {
+  const index = carrito.findIndex((item) => item.id === idProducto);
+  if (index !== -1) {
+    const productoEnCarrito = carrito[index];
 
-//5. Simular el Proceso de Compra
-function procesarCompra() {
-  console.log("Procesando compra...");
-  setTimeout(function () {
-    let total = calcularTotal();
-    total = aplicarDescuento(total);
-    console.log(`Compra completada. Total a pagar: $${total.toFixed(2)}`);
-  }, 3000);
-}
-
-function mostrarCuentaRegresiva() {
-  let tiempoRestante = 3; // Tiempo en segundos
-
-  function cuentaRegresiva() {
-    if (tiempoRestante > 0) {
-      console.log(`Compra confirmada en ${tiempoRestante}...`);
-      tiempoRestante--;
-      setTimeout(cuentaRegresiva, 1000); // Llamar a la función nuevamente después de 1 segundo
+    if (productoEnCarrito.cantidad > cantidad) {
+      productoEnCarrito.cantidad -= cantidad; // Reducir la cantidad
     } else {
-      console.log("¡Compra confirmada!");
+      carrito.splice(index, 1); // Eliminar si la cantidad es 0
     }
-  }
 
-  cuentaRegresiva(); // Iniciar la cuenta regresiva
+    // Restaurar el stock del producto en la lista
+    const producto = productos.find((prod) => prod.id === idProducto);
+    if (producto) producto.stock += cantidad;
+
+    renderizarCarrito();
+    renderizarProductos();
+  }
 }
 
-// Función para simular la compra con loader y procesar la compra
-function simularCompraYProcesar() {
+// Función para renderizar el carrito
+function renderizarCarrito() {
+  $carritoUL.innerHTML = ""; // Limpiar contenido previo
+
+  carrito.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`;
+
+    const botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.addEventListener("click", () => {
+      eliminarDelCarrito(item.id, 1); // Eliminar una unidad del producto
+    });
+
+    li.appendChild(botonEliminar);
+    $carritoUL.appendChild(li);
+  });
+
+  $totalP.textContent = `Total: $${calcularTotal().toFixed(2)}`;
+}
+
+// Función para calcular el total del carrito
+function calcularTotal() {
+  return carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
+}
+
+// Función para simular la compra con un loader de 2 segundos
+function simularCompra() {
   if (carrito.length === 0) {
     alert("El carrito está vacío. Agrega productos antes de procesar la compra.");
     return;
   }
 
-  const loader = document.getElementById("loader");
+  const loaderContainer = d.querySelector("#loader-container");
+  const loader = d.querySelector("#loader");
 
-  // Crear un estilo básico para el loader dinámico
-  loader.style.display = "block";
-  loader.style.border = "5px solid #f3f3f3"; // Fondo gris claro
-  loader.style.borderTop = "5px solid #3498db"; // Azul
-  loader.style.borderRadius = "50%";
+  // Configurar el estilo del loader dinámicamente
   loader.style.width = "50px";
   loader.style.height = "50px";
-  loader.style.margin = "20px auto"; // Centrarlo
-  loader.style.animation = "spin 1s linear infinite"; // Animación
+  loader.style.border = "6px solid rgba(0, 0, 0, 0.1)"; // Fondo suave
+  loader.style.borderLeft = "6px solid #3498db"; // Azul principal
+  loader.style.borderRadius = "50%"; // Círculo perfecto
+  loader.style.margin = "10px auto";
+  loader.style.animation = "spin 1s linear infinite"; // Animación dinámica
 
-  // Simular espera de 5 segundos con loader
+  // Definir la animación directamente en JavaScript
+  const style = document.createElement("style");
+  style.type = "text/css";
+  style.innerHTML = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Mostrar el loader
+  loaderContainer.style.display = "block";
+
   setTimeout(() => {
-    loader.style.display = "none"; // Ocultar el loader después de 5 segundos
-
-    // Procesar la compra
-    let total = calcularTotal();
-    total = aplicarDescuento(total); // Aplicar descuentos si corresponde
-    alert(`¡Compra completada! Total a pagar: $${total.toFixed(2)}`);
+    // Ocultar el loader después de 2 segundos
+    loaderContainer.style.display = "none";
+    alert("¡Compra procesada exitosamente!");
 
     // Vaciar el carrito y actualizar la interfaz
     carrito = [];
     renderizarCarrito();
-  }, 5000);
+  }, 2000);
 }
 
-// Evento para el botón "Simular Compra"
-document.getElementById("simular-compra").addEventListener("click", simularCompraYProcesar);
 
-// Animación para el loader (CSS dinámico)
-const style = document.createElement("style");
-style.type = "text/css";
-style.innerHTML = `
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-`;
-document.head.appendChild(style); // Agregar el estilo dinámico
+// Evento para simular la compra
+const $botonSimularCompra = d.createElement("button");
+$botonSimularCompra.textContent = "Procesar Compra";
+$botonSimularCompra.addEventListener("click", simularCompra);
+d.body.appendChild($botonSimularCompra);
 
-
-//6. Ejecuta el Código:
-procesarCompra();
-mostrarCuentaRegresiva();
+// Inicialización al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  cargarProductos();
+  renderizarCarrito();
+});
