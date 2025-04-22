@@ -11,3 +11,4 @@
 - ## [Practica 8:](docs/practica-8/main.js)
 - ## [Practica 9:](https://uwuolf.github.io/5toSemestre/)
 - ## [Practica 10:](tienda-online.md)
+- ## [Practica 11: Modelado Tienda](modelado-tienda.md)

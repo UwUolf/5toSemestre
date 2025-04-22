@@ -4,23 +4,35 @@
 - ## Descripción de la tienda: 
 En estatienda se venderán cartas pokemon sueltas de alto valor para que los coleccionistas de estas costosas cartas no se arriesguen a comprar demasiados productos para conseguir una sola carta sin excito.
 
-| Nombre                     | Descripción                                      | Precio Aproximado |
-|----------------------------|--------------------------------------------------|-------------------|
-| Giratina VSTAR             | Carta legendaria con diseño espectacular.       | $173.96           |
-| Mewtwo VSTAR               | Carta poderosa con habilidades psíquicas.       | $115.69           |
-| Arceus VSTAR               | Carta divina con gran valor coleccionable.      | $118.37           |
-| Origin Forme Dialga VSTAR  | Carta especial de Dialga en su forma original.  | $83.94            |
-| Origin Forme Palkia VSTAR  | Carta especial de Palkia en su forma original.  | $79.00            |
-| Suicune V                  | Carta de Suicune con diseño artístico único.    | $35.91            |
-| Raikou V                   | Carta de Raikou con habilidades eléctricas.     | $29.53            |
-| Entei V                    | Carta de Entei con diseño volcánico impresionante. | $30.99            |
-| Glaceon VSTAR              | Carta de Glaceon con habilidades de hielo.      | $36.50            |
-| Deoxys VMAX                | Carta de Deoxys con diseño futurista.           | $39.99            |
-| Hisuian Zoroark VSTAR      | Carta de Zoroark con diseño oscuro y elegante.  | $19.88            |
-| Pikachu (Secret Rare)      | Carta de Pikachu con varios amigos Galarianos.  | $15.83            |
-| Cynthia's Ambition         | Carta de entrenador con diseño artístico.       | $18.97            |
-| Elesa's Sparkle            | Carta de entrenador con temática vibrante.      | $16.44            |
-| Radiant Charizard          | Carta de Charizard con diseño radiante.         | $5.00             |
+# 🃏 Cartas Pokémon Tipo V y VSTAR - Tabla Unificada
+
+| Nombre                     | Descripción                                      | Precio Aproximado | Colección         | Imagen                                       |
+|----------------------------|--------------------------------------------------|-------------------|-------------------|----------------------------------------------|
+| Giratina VSTAR             | Carta legendaria con diseño espectacular.       | $173.96           | Crown Zenith      | ![Giratina](https://example.com/giratina.jpg) |
+| Mewtwo VSTAR               | Carta poderosa con habilidades psíquicas.       | $115.69           | Crown Zenith      | ![Mewtwo](https://example.com/mewtwo.jpg)     |
+| Arceus VSTAR               | Carta divina con gran valor coleccionable.      | $118.37           | Crown Zenith      | ![Arceus](https://example.com/arceus.jpg)     |
+| Origin Forme Dialga VSTAR  | Forma original con diseño único.                | $83.94            | Crown Zenith      | ![Dialga](https://example.com/dialga.jpg)     |
+| Origin Forme Palkia VSTAR  | Carta especial con fondo galáctico.             | $79.00            | Crown Zenith      | ![Palkia](https://example.com/palkia.jpg)     |
+| Suicune V                  | Diseño artístico de la bestia legendaria.       | $35.91            | Crown Zenith      | ![Suicune](https://example.com/suicune.jpg)   |
+| Raikou V                   | Carta con aura eléctrica potente.               | $29.53            | Crown Zenith      | ![Raikou](https://example.com/raikou.jpg)     |
+| Entei V                    | Diseño volcánico imponente.                     | $30.99            | Crown Zenith      | ![Entei](https://example.com/entei.jpg)       |
+| Glaceon VSTAR              | Carta de hielo con gran valor visual.           | $36.50            | Crown Zenith      | ![Glaceon](https://example.com/glaceon.jpg)   |
+| Deoxys VMAX                | Estilo futurista con gran presencia.            | $39.99            | Crown Zenith      | ![Deoxys](https://example.com/deoxys.jpg)     |
+| Hisuian Zoroark VSTAR      | Diseño oscuro y elegante.                       | $19.88            | Crown Zenith      | ![Zoroark](https://example.com/zoroark.jpg)   |
+| Pikachu (Secret Rare)      | Ilustración grupal con Pokémon de Galar.        | $15.83            | Crown Zenith      | ![Pikachu](https://example.com/pikachu.jpg)   |
+| Cynthia's Ambition         | Entrenadora decidida en pose dinámica.          | $18.97            | Crown Zenith      | ![Cynthia](https://example.com/cynthia.jpg)   |
+| Elesa's Sparkle            | Carta brillante con tonos eléctricos.           | $16.44            | Crown Zenith      | ![Elesa](https://example.com/elesa.jpg)       |
+| Radiant Charizard          | Charizard con efecto radiante.                  | $5.00             | Crown Zenith      | ![RadCharizard](https://example.com/charz.jpg)|
+| Charizard V                | Carta clásica con ilustración de combate.       | $95.00            | Champion’s Path   | ![CharizardV](https://example.com/charv.jpg)  |
+| Gardevoir V                | Carta psíquica estilizada.                      | $18.25            | Champion’s Path   | ![Gardevoir](https://example.com/garde.jpg)   |
+| Drednaw V                  | Tipo agua con diseño fuerte.                    | $6.75             | Champion’s Path   | ![Drednaw](https://example.com/dred.jpg)      |
+| Sylveon V                  | Hada con fondo colorido.                        | $24.50            | Evolving Skies    | ![Sylveon](https://example.com/sylv.jpg)      |
+| Umbreon V                  | Oscuridad y elegancia visual.                   | $37.90            | Evolving Skies    | ![Umbreon](https://example.com/umbre.jpg)     |
+| Rayquaza V                 | Dragón legendario con arte vibrante.            | $42.75            | Evolving Skies    | ![Rayquaza](https://example.com/ray.jpg)      |
+| Mewtwo V                   | Psíquico imponente en acción.                   | $29.99            | Pokémon GO        | ![MewtwoGO](https://example.com/mew2go.jpg)   |
+| Dragonite V                | Dragón urbano poderoso.                         | $19.50            | Pokémon GO        | ![Dragonite](https://example.com/drag.jpg)    |
+
+
 
 - ## MoodBoard
 ![MoodBoard](assets/MoodBoard.png)
