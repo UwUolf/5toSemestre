@@ -86,4 +86,8 @@
 - **Bloqueo temporal de cartas especulativas**  
   Las cartas que se sospeche estén siendo objeto de especulación serán retiradas temporalmente del catálogo hasta normalizarse el mercado.
 
+### Modelo Supabase
+
+![Modelo Supabase](assets/Modelo_Supabase.PNG)
+
 
